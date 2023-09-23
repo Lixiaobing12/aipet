@@ -48,5 +48,27 @@
 }
 
 .wallet-button {
-  margin-top: 8px;
+  /* border: 1px solid;
+  border-image-source: linear-gradient(
+    112.21deg,
+    #67deff 1.98%,
+    #ee66f9 98.02%
+  ); */
+  background: linear-gradient(112.21deg, #67deff 1.98%, #ee66f9 98.02%),
+    linear-gradient(
+      112.21deg,
+      rgba(103, 222, 255, 0.5) 1.98%,
+      rgba(238, 102, 249, 0.5) 98.02%
+    );
+  border-radius: 25px;
+}
+.wallet-button-disconnect {
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  border-radius: 25px;
+  padding: 0 12px;
+  font-weight: bold;
+}
+.wallet-button-disconnect img {
+  margin-right: 5px;
 }

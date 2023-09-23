@@ -1,14 +1,32 @@
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Routes,
+  useRoutes,
+} from "react-router-dom";
 
 import App from "../App";
+import Home from "../pages/Home";
+
+export const myRoute = [
+  {
+    path: "/",
+    element: <Home />,
+    meta: {
+      pageType: 1,
+    },
+  },
+];
+
+
 
 export function BaseRoutes() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />}></Route>
-        <Route path="/app" element={<App />}></Route>
-      </Routes>
-    </Router>
+    <Routes>
+      {myRoute.map((item) => (
+        <Route path={item.path} element={item.element} />
+      ))}
+    </Routes>
   );
 }
