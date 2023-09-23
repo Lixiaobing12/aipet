@@ -8,6 +8,10 @@
   color: #fff;
 }
 
+.main-content > div {
+  min-height: 100vh;
+  padding: 70px 16px 30px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
