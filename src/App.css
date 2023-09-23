@@ -12,6 +12,13 @@
   min-height: 100vh;
   padding: 70px 16px 30px;
 }
+
+.linear-text {
+  background: linear-gradient(112.21deg, #67DEFF 1.98%, #EE66F9 98.02%);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: .9em;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
