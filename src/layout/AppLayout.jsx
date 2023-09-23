@@ -1,7 +1,7 @@
 import { Layout, Row, Col } from "antd";
 import { Content, Footer, Header } from "antd/lib/layout/layout";
-import Minter from "../containers/Minter";
-import WrongNetwork from "../containers/WrongNetwork";
+import Minter from "../pages/Minter";
+import WrongNetwork from "../pages/WrongNetwork";
 import logo from "../images/sol.png";
 import { Route, Routes } from "react-router-dom";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
