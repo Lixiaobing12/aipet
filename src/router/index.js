@@ -1,12 +1,9 @@
 import {
   BrowserRouter as Router,
-  Link,
   Route,
   Routes,
-  useRoutes,
 } from "react-router-dom";
 
-import App from "../App";
 import Home from "../pages/Home";
 
 export const myRoute = [
@@ -14,18 +11,19 @@ export const myRoute = [
     path: "/",
     element: <Home />,
     meta: {
-      pageType: 1,
+      // type:1 首页 2有title、返回路径 3 只有返回路径
+      type: 1,
+      title:"sss",
+      backurl:'/'
     },
   },
 ];
-
-
 
 export function BaseRoutes() {
   return (
     <Routes>
       {myRoute.map((item) => (
-        <Route path={item.path} element={item.element} />
+        <Route path={item.path} element={item.element} key={item.path} />
       ))}
     </Routes>
   );
