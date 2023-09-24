@@ -5,7 +5,10 @@ import WalletContextProvider from "./contexts/WalletContextProvider";
 
 function App() {
   return (
-    <div className="App" style={{ background: "rgb(2,12,34)",minHeight:'100vh' }}>
+    <div
+      className="App"
+      style={{ background: "rgb(2,12,34)", minHeight: "100vh" }}
+    >
       <WalletContextProvider>
         <AppLayout />
       </WalletContextProvider>

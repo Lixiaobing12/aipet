@@ -1,0 +1,53 @@
+#title {
+  /* Group 66 */
+
+  position: absolute;
+  width: 305px;
+  height: 36px;
+  left: 70px;
+  top: 40px;
+
+  /* Rectangle 29 */
+
+  position: absolute;
+  width: 305px;
+  height: 36px;
+  left: 70px;
+  top: 40px;
+
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(2px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  /* Rectangle 30 */
+
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 301px;
+  height: 28px;
+  left: 74px;
+  top: 44px;
+
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  /* pet file */
+
+  position: absolute;
+  width: 66px;
+  height: 21px;
+  left: 191px;
+  top: 47px;
+
+  font-family: "SF Pro Text";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+  text-transform: capitalize;
+
+  color: #ffffff;
+}
