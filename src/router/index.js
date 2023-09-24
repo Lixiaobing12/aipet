@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 
 import Home from "../pages/Home";
+import Minter from "../pages/Minter";
 
 export const myRoute = [
   {
@@ -14,6 +15,16 @@ export const myRoute = [
       // type:1 首页 2有title、返回路径 3 只有返回路径
       type: 1,
       title:"sss",
+      backurl:'/'
+    },
+  },
+  {
+    path: "/Mint",
+    element: <Minter />,
+    meta: {
+      // type:1 首页 2有title、返回路径 3 只有返回路径
+      type: 2,
+      title:"Mint Pet",
       backurl:'/'
     },
   },

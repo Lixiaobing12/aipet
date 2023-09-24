@@ -57,6 +57,7 @@ const Items = () => {
   }, [height]);
 };
 const Home = () => {
+  const navigate = useNavigate();
   const [layouts, action] = useReducer(
     (layout, values) => {
       return { ...layout, ...values };
@@ -146,7 +147,12 @@ const Home = () => {
         style={{ margin: "26vh auto 0" }}
       />
       <div className="flex justify-around">
-        <img src="/img/home_mint.png" width={90} alt="" />
+        <div className="relative flex justify-center">
+          <div className="absolute" style={{ width: "170px", top: "-60px" }}>
+            <img src="/img/home_tip.png" alt="" />
+          </div>
+          <img src="/img/home_mint.png" width={90} alt="" onClick={()=>{navigate('/Mint')}}/>
+        </div>
         <img src="/img/home_martin.png" width={90} alt="" />
       </div>
     </div>
