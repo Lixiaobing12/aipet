@@ -13,8 +13,6 @@ export default function ChatCard() {
     logoColor: "#E7F6F2",
   };
 
-  const bottomRef = useRef(null);
-
   // 使用自定义Hook来处理逻辑
   const {
     userInput,
@@ -31,12 +29,13 @@ export default function ChatCard() {
     setToken,
     themes,
     setThemes,
+    bottomRef,
     browserSupportsSpeechRecognition,
   } = useChatHook(initialToken, initialThemes);
 
   return (
-    <div>
-      <div className=" flex-1">
+    <div className="pr-4 ">
+      <div className=" flex-1 overflow-y-scroll h-[300px]">
         <div
           className="max-w-2xl mx-auto space-y-12 grid grid-cols-1 overflow-y-auto scroll-smooth scrollbar-hide overflow-x-hidden"
           style={{ maxHeight: "30rem" }}

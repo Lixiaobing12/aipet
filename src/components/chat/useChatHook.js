@@ -9,6 +9,7 @@ const useChatHook = (initialToken, initialThemes) => {
   const [userInput, setUserInput] = useState("");
   const [recording, setRecording] = useState(false);
   const [loading, setLoading] = useState(false);
+  const bottomRef = useRef(null);
   const [messages, setMessages] = useState([
     {
       msg: "您好，请问有什么可以帮到你吗 ?",
@@ -50,7 +51,7 @@ const useChatHook = (initialToken, initialThemes) => {
           speechSynthesis.cancel();
           console.log(response.data);
 
-          let utterance = new SpeechSynthesisUtterance(response.data);
+          let utterance = new SpeechSynthesisUtterance(response.data.data.msg);
           speechSynthesis.speak(utterance);
 
           let resp = response.data;
@@ -78,6 +79,9 @@ const useChatHook = (initialToken, initialThemes) => {
           console.log(error);
         }
       );
+    }
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
     }
     // eslint-disable-next-line
   }, [messages]);
@@ -126,6 +130,7 @@ const useChatHook = (initialToken, initialThemes) => {
     setToken,
     themes,
     setThemes,
+    bottomRef,
     browserSupportsSpeechRecognition,
   };
 };
