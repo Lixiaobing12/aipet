@@ -1,12 +1,9 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from "../pages/Home";
 import Minter from "../pages/Minter";
 import Minters from '../pages/Minters';
+import PetArchives from "../pages/PetArchives";
 
 export const myRoute = [
   {
@@ -15,8 +12,18 @@ export const myRoute = [
     meta: {
       // type:1 首页 2有title、返回路径 3 只有返回路径
       type: 1,
-      title:"sss",
-      backurl:'/'
+      title: "sss",
+      backurl: "/",
+    },
+  },
+  {
+    path: "/petArchives",
+    element: <PetArchives />,
+    meta: {
+      // type:1 首页 2有title、返回路径 3 只有返回路径
+      type: 1,
+      title: "petArchives",
+      backurl: "/",
     },
   },
   {
@@ -25,8 +32,8 @@ export const myRoute = [
     meta: {
       // type:1 首页 2有title、返回路径 3 只有返回路径
       type: 2,
-      title:"Mint Pet",
-      backurl:'/'
+      title: "Mint Pet",
+      backurl: "/",
     },
   },
   // {
