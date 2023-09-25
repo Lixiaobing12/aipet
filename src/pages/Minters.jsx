@@ -36,11 +36,11 @@ import {
 import SolMintNftIdl from "../idl/sol_mint_nft.json";
 
 const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
-  "CfuCsdZ1GtXQabYBx9UFDzyBjKDPNVU9jQgnsskjpNEK"
+  "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
 );
 
 const SOL_MINT_NFT_PROGRAM_ID = new anchor.web3.PublicKey(
-  "8bHVrpF2hDQ859tymYsZjcc6bPFi2HsaFBmXMgx5sfe2"
+  "9FKLho9AUYScrrKgJbG1mExt5nSgEfk1CNEbR8qBwKTZ"
 );
 
 const NFT_SYMBOL = "ani-nft";
@@ -65,7 +65,7 @@ const Minter = () => {
   const [mintSuccess, setMintSuccess] = useState(false);
 
   const onFileSelected = (file) => {
-    console.log('file',file)
+    console.log("file", file);
     const reader = new window.FileReader();
     reader.readAsArrayBuffer(file);
     reader.onloadend = () => {
@@ -108,7 +108,11 @@ const Minter = () => {
 
     setMinting(true);
     // const result = await mint(name, NFT_SYMBOL, uploadedMetatdataUrl);
-    const result = await mint(name, NFT_SYMBOL, 'https://bafybeihshos2fqh5nlz27j26fyvfy3ctwd2t3rgjoslsmmzxzykxhzwbea.ipfs.infura-ipfs.io');
+    const result = await mint(
+      name,
+      NFT_SYMBOL,
+      "https://bafybeihshos2fqh5nlz27j26fyvfy3ctwd2t3rgjoslsmmzxzykxhzwbea.ipfs.infura-ipfs.io"
+    );
     setMinting(false);
     setMintSuccess(result);
   };
@@ -248,13 +252,13 @@ const Minter = () => {
     const metadataAddress = await getMetadata(mintKey.publicKey);
     console.log("Metadata address: ", metadataAddress.toBase58());
 
-    console.log("programId: ",anchor.web3.SystemProgram.programId.toString())
+    console.log("programId: ", anchor.web3.SystemProgram.programId.toString());
     try {
       const tx = program.transaction.mintNft(
         mintKey.publicKey,
         name,
         symbol,
-        metadataUrl,
+        '',
         {
           accounts: {
             mintAuthority: provider.wallet.publicKey,
@@ -269,23 +273,19 @@ const Minter = () => {
           },
         }
       );
-        console.log(mintKey.publicKey,
-          name,
-          symbol,
-          metadataUrl,
-          {
-            accounts: {
-              mintAuthority: provider.wallet.publicKey,
-              mint: mintKey.publicKey,
-              tokenAccount: nftTokenAccount,
-              tokenProgram: TOKEN_PROGRAM_ID,
-              metadata: metadataAddress,
-              tokenMetadataProgram: TOKEN_METADATA_PROGRAM_ID,
-              payer: provider.wallet.publicKey,
-              systemProgram: anchor.web3.SystemProgram.programId,
-              rent: anchor.web3.SYSVAR_RENT_PUBKEY,
-            },
-          })
+      console.log(mintKey.publicKey, name, symbol, metadataUrl, {
+        accounts: {
+          mintAuthority: provider.wallet.publicKey,
+          mint: mintKey.publicKey,
+          tokenAccount: nftTokenAccount,
+          tokenProgram: TOKEN_PROGRAM_ID,
+          metadata: metadataAddress,
+          tokenMetadataProgram: TOKEN_METADATA_PROGRAM_ID,
+          payer: provider.wallet.publicKey,
+          systemProgram: anchor.web3.SystemProgram.programId,
+          rent: anchor.web3.SYSVAR_RENT_PUBKEY,
+        },
+      });
       const signature = await wallet.sendTransaction(tx, connection);
       await connection.confirmTransaction(signature, "confirmed");
       console.log("Mint Success!");

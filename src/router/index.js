@@ -6,6 +6,7 @@ import {
 
 import Home from "../pages/Home";
 import Minter from "../pages/Minter";
+import Minters from '../pages/Minters';
 
 export const myRoute = [
   {
@@ -28,6 +29,16 @@ export const myRoute = [
       backurl:'/'
     },
   },
+  {
+    path:'/rM',
+    element:<Minters />,
+    meta: {
+      // type:1 首页 2有title、返回路径 3 只有返回路径
+      type: 2,
+      title:"Mint Pet",
+      backurl:'/'
+    },
+  }
 ];
 
 export function BaseRoutes() {

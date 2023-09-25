@@ -105,6 +105,9 @@ const Minter = () => {
             <img src={url} key={url} />
           ))}
       </div>
+      <div>
+        <button>Mint</button>
+      </div>
 
       <ParallaxText baseVelocity={0} pets={pets} action={action}></ParallaxText>
     </div>
