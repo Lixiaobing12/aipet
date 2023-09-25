@@ -29,16 +29,16 @@ export const myRoute = [
       backurl:'/'
     },
   },
-  {
-    path:'/rM',
-    element:<Minters />,
-    meta: {
-      // type:1 首页 2有title、返回路径 3 只有返回路径
-      type: 2,
-      title:"Mint Pet",
-      backurl:'/'
-    },
-  }
+  // {
+  //   path:'/rM',
+  //   element:<Minters />,
+  //   meta: {
+  //     // type:1 首页 2有title、返回路径 3 只有返回路径
+  //     type: 2,
+  //     title:"Mint Pet",
+  //     backurl:'/'
+  //   },
+  // }
 ];
 
 export function BaseRoutes() {
