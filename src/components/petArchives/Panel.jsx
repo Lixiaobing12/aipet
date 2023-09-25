@@ -12,7 +12,7 @@ import ChatCard from "../chat/ChatCard";
 export default function Panel() {
   return (
     <div
-      className=" w-screen h-screen"
+      className=" w-screen h-screen overflow-hidden"
       style={{
         backgroundImage: `url(${PNG_petFile_Lennie})`,
         backgroundSize: "70vw 55vh",
