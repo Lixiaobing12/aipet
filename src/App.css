@@ -86,13 +86,16 @@
 }
 
 .parallax {
-  overflow: hidden;
+  overflow-x: auto;
   letter-spacing: -2px;
   line-height: 0.8;
   margin: 0;
   white-space: nowrap;
   display: flex;
   flex-wrap: nowrap;
+}
+.parallax::-webkit-scrollbar {
+  display: none;
 }
 
 .parallax .scroller {

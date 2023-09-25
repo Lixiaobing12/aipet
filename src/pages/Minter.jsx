@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 import { useRef } from "react";
 import {
   motion,
@@ -19,21 +19,28 @@ function ParallaxText({ pets, baseVelocity = 100, action }) {
    * we have four children (100% / 4). This would also want deriving from the
    * dynamically generated number of children.
    */
+  const getScale = (index) => {
+    console.log(index);
+    return 2;
+  };
+  const ref = useRef(null);
   return useMemo(
     () => (
-      <div className="parallax">
-        <motion.div className="scroller">
-          {pets.map(({ url }, index) => (
-            <motion.img
-              src={url}
-              key={url}
-              style={{ width: "30%", margin: "0 -10px" }}
-              onClick={() => {
-                action(index);
-              }}
-            ></motion.img>
-          ))}
-        </motion.div>
+      <div className="parallax" ref={ref}>
+        {pets.map(({ url }, index) => (
+          <img
+            src={url}
+            key={url}
+            style={{
+              width: "30%",
+              marginRight: "-20px",
+              transform: "scale(1.2)",
+            }}
+            onClick={() => {
+              action(index);
+            }}
+          ></img>
+        ))}
       </div>
     ),
     []
@@ -49,15 +56,15 @@ const Minter = () => {
           item.active = false;
         }
       });
-      return [...pets]
+      return [...pets];
     },
     [
-      { url: "/img/bobo.png", active: false },
-      { url: "/img/boom.png", active: false },
-      { url: "/img/gg.png", active: true },
-      { url: "/img/happy.png", active: false },
-      { url: "/img/huahua.png", active: false },
-      { url: "/img/lala.png", active: false },
+      { url: "/img/boom.png", active: false, isMint: false },
+      { url: "/img/bobo.png", active: false, isMint: false },
+      { url: "/img/gg.png", active: true, isMint: true },
+      { url: "/img/happy.png", active: false, isMint: false },
+      { url: "/img/huahua.png", active: false, isMint: false },
+      { url: "/img/lala.png", active: false, isMint: false },
     ]
   );
   return (
@@ -91,13 +98,18 @@ const Minter = () => {
             src="/img/sol.png"
             width={30}
             alt=""
-            className="absolute"
+            className="absolute drop-shadow-lg"
             style={{ left: "-10px" }}
           />
         </div>
       </div>
       <div
-        style={{ margin: "20px auto", display: "inline-block", width: "67%",height:"330px" }}
+        style={{
+          margin: "20px auto 0",
+          display: "inline-block",
+          width: "67%",
+          height: "330px",
+        }}
       >
         {pets
           .filter((i) => i.active)
@@ -105,8 +117,37 @@ const Minter = () => {
             <img src={url} key={url} />
           ))}
       </div>
-      <div>
-        <button>Mint</button>
+        <div
+          style={{
+            backgroundImage:
+              "linear-gradient(112.21deg, #67DEFF 1.98%, #EE66F9 98.02%)",
+            borderRadius: "15px 0 15px 0",
+            backgroundSize: "100% 100%",
+            padding: "5px 10px",
+            marginBottom:"20px"
+          }}
+          className="inline-flex items-center justify-center"
+        >
+          <div className="flex items-center relative">
+            <div
+              className="rounded-b-br font-bold"
+              style={{
+                background: "rgba(255,255,255,0.2)",
+                padding: "0 10px 0 20px",
+                minWidth: "80px",
+              }}
+            >
+              1
+            </div>
+            <img
+              src="/img/sol.png"
+              width={30}
+              alt=""
+              className="absolute drop-shadow-lg"
+              style={{ left: "-10px" }}
+            />
+          </div>
+          <span style={{marginLeft:"10px",fontWeight:"bold"}}>Mint</span>
       </div>
 
       <ParallaxText baseVelocity={0} pets={pets} action={action}></ParallaxText>
