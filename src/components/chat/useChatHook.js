@@ -52,8 +52,8 @@ const useChatHook = (initialToken, initialThemes) => {
           console.log(response.data);
 
           let utterance = new SpeechSynthesisUtterance(response.data.data.msg);
-          // speechSynthesis.speak(utterance);
-          speechSynthesis.speak("喵喵喵");
+          speechSynthesis.speak(utterance);
+          // speechSynthesis.speak("喵喵喵");
 
           let resp = response.data;
           let msg = "";

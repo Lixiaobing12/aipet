@@ -3,3 +3,7 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+
+.gradient-color {
+  background: linear-gradient(to right, #67deff, #ee66f9);
+}

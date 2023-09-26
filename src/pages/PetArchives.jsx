@@ -4,7 +4,7 @@ import Panel from "../components/petArchives/Panel";
 
 export default function PetArchives() {
   return (
-    <div className=" h-screen bg-black">
+    <div className="  bg-black">
       <HeaderBack />
       <Panel />
     </div>
