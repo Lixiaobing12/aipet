@@ -31,8 +31,16 @@ const AppLayout = () => {
     }, 200);
   }, []);
   return (
-    <div className="flex flex-col" >
-      <div style={{ margin: "10px 0 15px",position:"absolute",left:'16px',right:'16px',top:'12px' }}>
+    <div className="flex flex-col overflow-hidden">
+      <div
+        style={{
+          margin: "10px 0 15px",
+          position: "absolute",
+          left: "16px",
+          right: "16px",
+          top: "12px",
+        }}
+      >
         {!!layouts.type && start && <LayoutHeader {...layouts} />}
       </div>
       <div className="flex-1 main-content">

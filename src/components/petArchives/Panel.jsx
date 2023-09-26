@@ -2,6 +2,10 @@ import React from "react";
 import SVG_money from "../../images/svg/money.svg";
 import SVG_rugby from "../../images/svg/rugby.svg";
 import SVG_whiteline from "../../images/svg/whiteline.svg";
+import SVG_skill from "../../images/svg/skill.svg";
+import SVG_skin from "../../images/svg/skin.svg";
+import SVG_voice from "../../images/svg/voice.svg";
+import SVG_feed from "../../images/svg/feed.svg";
 import PNG_union from "../../images/png/union.png";
 import PNG_gradient from "../../images/png/gradient.png";
 import PNG_petFile_Lennie from "../../images/png/petFile_Lennie.png";
@@ -20,8 +24,8 @@ export default function Panel() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="px-3 mt-3  text-white text-xs">
-        <div className="flex justify-between">
+      <div className=" mt-3  text-white text-xs">
+        <div className="flex justify-between ">
           <div className=" flex-col ">
             <div className="flex mt-6 ">
               <div className="bg-[#FFFFFF29]  pl-1 flex justify-center items-center rounded-r-lg">
@@ -77,14 +81,40 @@ export default function Panel() {
               <p>Blockchain address</p>
               <p className=" text-sm font-bold">0x59...0000</p>
             </div>
+            <div className="mt-2 flex  ">
+              <img className="mx-1" src={SVG_skin} alt="" />
+              <img className="mx-1" src={SVG_skill} alt="" />
+              <img className="mx-1" src={SVG_voice} alt="" />
+            </div>
           </div>
           <div>
-            <div className=" flex">
+            <div className=" flex justify-end pr-4">
               <img className="-mr-4" src={SVG_money} alt="money" />
               <img className="-mr-2" src={SVG_rugby} alt="rugby" />
             </div>
             <ChatCard />
           </div>
+        </div>
+      </div>
+      <div className="bg-[#FFFFFF29]  flex mt-2 justify-start items-center rounded-full mr-8">
+        <div className="  rounded-full w-10 h-10 flex justify-center items-center bg-[#0F49A080] border-2 border-white">
+          <img className=" w-12 h-12 rounded-full" src={SVG_feed} alt="" />
+        </div>
+        <div className="flex-1  mx-3">
+          <div className="flex bg-white rounded-full h-6">
+            <div className=" gradient-color rounded-full h-6  w-2/3"></div>
+          </div>
+        </div>
+      </div>
+      <div className="bg-[#FFFFFF29] mt-4  rounded-xl mr-8 p-2 text-left">
+        <p className=" text-left text-sm">Personality Label</p>
+        <div className="mt-2 flex gap-4 text-black flex-wrap">
+          <div className="px-1 rounded-sm bg-white">Cute</div>
+          <div className="px-1 rounded-sm bg-white">CuteCute</div>
+          <div className="px-1 rounded-sm bg-white">CuteCuteCute</div>
+          <div className="px-1 rounded-sm bg-white">CuteCuteCute</div>
+          <div className="px-1 rounded-sm bg-white">CuteCuteCuteCuteCute</div>
+          <div className="px-2 rounded-sm bg-white"> + </div>
         </div>
       </div>
     </div>
