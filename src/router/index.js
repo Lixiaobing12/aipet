@@ -2,8 +2,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from "../pages/Home";
 import Minter from "../pages/Minter";
-import Minters from '../pages/Minters';
+import Minters from "../pages/Minters";
 import PetArchives from "../pages/PetArchives";
+import Martin from "../pages/Martin/MartinPet";
+import TitleSlot from "../components/martin/TitleSlot";
 
 export const myRoute = [
   {
@@ -33,6 +35,39 @@ export const myRoute = [
       // type:1 首页 2有title、返回路径 3 只有返回路径
       type: 2,
       title: "Mint Pet",
+      backurl: "/",
+    },
+  },
+  {
+    path: "/Martin-Pet",
+    element: <Martin />,
+    meta: {
+      // type:1 首页 2有title、返回路径 3 只有返回路径 4使用组件
+      type: 4,
+      title: "",
+      slot: <TitleSlot />,
+      backurl: "/",
+    },
+  },
+  {
+    path: "/Martin-Skin",
+    element: <Martin />,
+    meta: {
+      // type:1 首页 2有title、返回路径 3 只有返回路径 4使用组件
+      type: 4,
+      title: "",
+      slot: <TitleSlot />,
+      backurl: "/",
+    },
+  },
+  {
+    path: "/Martin-House",
+    element: <Martin />,
+    meta: {
+      // type:1 首页 2有title、返回路径 3 只有返回路径 4使用组件
+      type: 4,
+      title: "",
+      slot: <TitleSlot />,
       backurl: "/",
     },
   },

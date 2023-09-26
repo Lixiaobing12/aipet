@@ -153,7 +153,7 @@ const Home = () => {
           </div>
           <img src="/img/home_mint.png" width={90} alt="" onClick={()=>{navigate('/Mint')}}/>
         </div>
-        <img src="/img/home_martin.png" width={90} alt="" />
+        <img src="/img/home_martin.png" width={90} alt="" onClick={()=>navigate('/Martin-Pet')}/>
       </div>
     </div>
   );

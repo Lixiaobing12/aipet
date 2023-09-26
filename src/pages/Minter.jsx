@@ -1,16 +1,7 @@
 import { useEffect, useMemo, useReducer, useState } from "react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import BigNumber from "bignumber.js";
 import { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  useMotionValue,
-  useVelocity,
-  useAnimationFrame,
-} from "framer-motion";
-import { wrap } from "@motionone/utils";
-
 function ParallaxText({ pets, baseVelocity = 100, action }) {
   /**
    * The number of times to repeat the child text should be dynamically calculated
@@ -47,6 +38,16 @@ function ParallaxText({ pets, baseVelocity = 100, action }) {
   );
 }
 const Minter = () => {
+  const connection = useConnection();
+  const { publicKey } = useWallet();
+  const [balance, setBalance] = useState("000.000");
+  const init = async () => {
+    const balance = await connection.connection.getBalance(publicKey);
+    setBalance(BigNumber(balance).div(1e9).toFixed(3));
+  };
+  useEffect(() => {
+    init();
+  }, []);
   const [pets, action] = useReducer(
     (pets, petIndex) => {
       pets.forEach((item, index) => {
@@ -68,7 +69,7 @@ const Minter = () => {
     ]
   );
   return (
-    <div style={{ marginTop: "10px" }}>
+    <div style={{ marginTop: "10px", overflow: "hidden" }}>
       <div className="flex justify-between items-start">
         <div className="flex-col">
           <div
@@ -92,7 +93,7 @@ const Minter = () => {
               padding: "0 10px 0 20px",
             }}
           >
-            000.000
+            {balance}
           </div>
           <img
             src="/img/sol.png"
@@ -117,39 +118,45 @@ const Minter = () => {
             <img src={url} key={url} />
           ))}
       </div>
-        <div
-          style={{
-            backgroundImage:
-              "linear-gradient(112.21deg, #67DEFF 1.98%, #EE66F9 98.02%)",
-            borderRadius: "15px 0 15px 0",
-            backgroundSize: "100% 100%",
-            padding: "5px 10px",
-            marginBottom:"20px"
-          }}
-          className="inline-flex items-center justify-center"
-        >
-          <div className="flex items-center relative">
-            <div
-              className="rounded-b-br font-bold"
-              style={{
-                background: "rgba(255,255,255,0.2)",
-                padding: "0 10px 0 20px",
-                minWidth: "80px",
-              }}
-            >
-              1
-            </div>
-            <img
-              src="/img/sol.png"
-              width={30}
-              alt=""
-              className="absolute drop-shadow-lg"
-              style={{ left: "-10px" }}
-            />
+      <div
+        style={{
+          backgroundImage:
+            "linear-gradient(112.21deg, #67DEFF 1.98%, #EE66F9 98.02%)",
+          borderRadius: "15px 0 15px 0",
+          backgroundSize: "100% 100%",
+          padding: "5px 10px",
+          marginBottom: "20px",
+          marginTop: "-15px",
+        }}
+        className="inline-flex items-center justify-center"
+      >
+        <div className="flex items-center relative">
+          <div
+            className="rounded-b-br font-bold"
+            style={{
+              background: "rgba(255,255,255,0.2)",
+              padding: "0 10px 0 20px",
+              minWidth: "80px",
+            }}
+          >
+            1
           </div>
-          <span style={{marginLeft:"10px",fontWeight:"bold"}}>Mint</span>
+          <img
+            src="/img/sol.png"
+            width={30}
+            alt=""
+            className="absolute drop-shadow-lg"
+            style={{ left: "-10px" }}
+          />
+        </div>
+        <span style={{ marginLeft: "10px", fontWeight: "bold" }}>Mint</span>
       </div>
 
+      <div className="absolute top-1/2 right-5 flex-col">
+        <img src="/img/skin.png" width={40} />
+        <img src="/img/skill.png" width={40} style={{ marginTop: "15px" }} />
+      </div>
+      {/* <div style={{ height: "100px", width: "100%", background: "#fff" }}></div> */}
       <ParallaxText baseVelocity={0} pets={pets} action={action}></ParallaxText>
     </div>
   );

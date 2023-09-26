@@ -3,10 +3,23 @@ import {
   WalletDisconnectButton,
 } from "@solana/wallet-adapter-react-ui";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SystemProgram } from "@solana/web3.js";
+import BigNumber from "bignumber.js";
 
 const ConnectWrapper = () => {
+  const connection = useConnection();
+  const { publicKey } = useWallet();
+  const [balance, setBalance] = useState("000.000");
+  const init = async () => {
+    const balance = await connection.connection.getBalance(publicKey);
+    setBalance(BigNumber(balance).div(1e9).toFixed(3));
+  };
+  useEffect(() => {
+    init();
+  }, []);
+
   return (
     <div className="flex justify-between">
       <div>
@@ -14,12 +27,22 @@ const ConnectWrapper = () => {
       </div>
       <div className="wallet-button-disconnect flex items-center">
         <img src="/img/money.svg" width={25}></img>
-        <div>000.000 SOL</div>
+        <div>{balance} SOL</div>
       </div>
     </div>
   );
 };
 const DisConnectWrapper = () => {
+  const connection = useConnection();
+  const { publicKey } = useWallet();
+  const [balance, setBalance] = useState("000.000");
+  const init = async () => {
+    const balance = await connection.connection.getBalance(publicKey);
+    setBalance(BigNumber(balance).div(1e9).toFixed(3));
+  };
+  useEffect(() => {
+    init();
+  }, []);
   return (
     <div className="flex justify-between">
       <div className="wallet-button">
@@ -27,7 +50,7 @@ const DisConnectWrapper = () => {
       </div>
       <div className="wallet-button-disconnect flex items-center">
         <img src="/img/money.svg" width={25}></img>
-        <div>000.000 SOL</div>
+        <div>{balance} SOL</div>
       </div>
     </div>
   );
@@ -90,6 +113,23 @@ const OnlyBackWapper = ({ backurl = "/" }) => {
     </div>
   );
 };
+
+const UseSlot = ({ backurl = "/", slot }) => {
+  const navigate = useNavigate();
+  const back = () => {
+    navigate(backurl);
+  };
+  return (
+    <div className="flex items-center" style={{ margin: "0 -10px" }}>
+      <img
+        src="/img/back.svg"
+        style={{ width: "20%", height: "33px" }}
+        onClick={back}
+      />
+      {slot}
+    </div>
+  );
+};
 /**
  *
  * @param {Object} props
@@ -104,5 +144,7 @@ export const LayoutHeader = (props) => {
     return <BothComponentWapper {...props} />;
   } else if (props.type === 3) {
     return <OnlyBackWapper {...props} />;
+  } else if (props.type === 4) {
+    return <UseSlot {...props} />;
   }
 };

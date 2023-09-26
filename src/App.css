@@ -97,7 +97,9 @@
 .parallax::-webkit-scrollbar {
   display: none;
 }
-
+.hiddenscrollbar::-webkit-scrollbar{
+  display: none;
+}
 .parallax .scroller {
   font-weight: 600;
   text-transform: uppercase;
@@ -107,4 +109,12 @@
   display: flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
+}
+
+.titleItem {
+  border: 1px solid transparent;
+  border-radius: 10px 0 ;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(112.21deg, #67DEFF 1.98%, #EE66F9 98.02%);
 }
