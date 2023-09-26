@@ -5,6 +5,8 @@ import Minter from "../pages/Minter";
 import Minters from "../pages/Minters";
 import PetArchives from "../pages/PetArchives";
 import Martin from "../pages/Martin/MartinPet";
+import MartinSkin from '../pages/Martin/MartinSkin';
+import MartinHouse from '../pages/Martin/MartinHouse';
 import TitleSlot from "../components/martin/TitleSlot";
 
 export const myRoute = [
@@ -51,7 +53,7 @@ export const myRoute = [
   },
   {
     path: "/Martin-Skin",
-    element: <Martin />,
+    element: <MartinSkin />,
     meta: {
       // type:1 首页 2有title、返回路径 3 只有返回路径 4使用组件
       type: 4,
@@ -62,7 +64,7 @@ export const myRoute = [
   },
   {
     path: "/Martin-House",
-    element: <Martin />,
+    element: <MartinHouse />,
     meta: {
       // type:1 首页 2有title、返回路径 3 只有返回路径 4使用组件
       type: 4,

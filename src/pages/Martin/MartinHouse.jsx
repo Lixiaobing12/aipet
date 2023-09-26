@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 
 const Hot = () => (
   <div className="flex overflow-x-auto hiddenscrollbar">
-    <img src="/img/martin/mm.png" width={100} alt="" className="mx-1" />
-    <img src="/img/martin/gg.png" width={100} alt="" className="mx-1" />
-    <img src="/img/martin/bobo.png" width={100} alt="" className="mx-1" />
-    <img src="/img/martin/lala.png" width={100} alt="" className="mx-1" />
+    <img src="/img/land/1.png" width={100} alt="" className="mx-1" />
+    <img src="/img/land/2.png" width={100} alt="" className="mx-1" />
   </div>
 );
 const GridList = () => {
@@ -13,30 +11,30 @@ const GridList = () => {
     {
       aid: "000000",
       nickname: "Lennie",
-      skill: ["cute", "Lively", "Silly"],
+      skill: ["elegant", "mystery"],
       price: "1",
-      img: "/img/martin/mm.png",
+      img: "/img/land/item-1.png",
     },
     {
       aid: "000001",
       nickname: "Lennie",
-      skill: ["cute", "Lively", "Silly"],
+      skill: ["cool", "Cyber"],
       price: "1",
-      img: "/img/martin/gg.png",
+      img: "/img/land/item-2.png",
     },
     {
       aid: "000002",
       nickname: "Lennie",
       skill: ["cute", "Lively", "Silly"],
       price: "1",
-      img: "/img/martin/bobo.png",
+      img: "/img/land/item-3.png",
     },
     {
       aid: "000003",
       nickname: "Lennie",
       skill: ["cute", "Lively", "Silly"],
       price: "1",
-      img: "/img/martin/lala.png",
+      img: "/img/land/item-4.png",
     },
   ]);
 
@@ -69,9 +67,13 @@ const GridList = () => {
 const Martin = () => {
   return (
     <div style={{ margin: "0" }}>
-      <div className="flex justify-center font-bold my-4 text-xl">HOT PET</div>
+      <div className="flex justify-center font-bold my-4 text-xl">
+        HOT HOUSE
+      </div>
       <Hot />
-      <div className="flex justify-center font-bold my-4 text-xl">All PET</div>
+      <div className="flex justify-center font-bold my-4 text-xl">
+        All HOUSE
+      </div>
       <GridList />
     </div>
   );
