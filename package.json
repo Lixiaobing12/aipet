@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@metaplex-foundation/mpl-candy-machine": "^6.0.0-alpha.20",
-    "@metaplex-foundation/mpl-token-metadata": "3.0.0",
+    "@metaplex-foundation/mpl-token-metadata": "3.1.0",
     "@metaplex-foundation/umi": "^0.8.9",
     "@metaplex-foundation/umi-bundle-defaults": "^0.8.9",
     "@motionone/utils": "^10.16.3",

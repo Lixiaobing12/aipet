@@ -2,11 +2,14 @@ import { useEffect, useMemo, useReducer, useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import BigNumber from "bignumber.js";
 import { useRef } from "react";
+import { Spin, notification } from "antd";
 import {
   Metaplex,
   walletAdapterIdentity,
   PublicKey,
 } from "@metaplex-foundation/js";
+// import * as plugin from '@metaplex-foundation/mpl-token-metadata';
+
 import setting from "../setting.json";
 import { Mint, getCandyMachine } from "../utils/mint";
 import React from "react";
@@ -50,8 +53,10 @@ function ParallaxText({ pets, baseVelocity = 100, action }) {
   );
 }
 const Minter = () => {
+  const [api, contextHolder] = notification.useNotification();
   const connection = useConnection();
   const wallet = useWallet();
+  const [loading, setLoading] = useState(false);
   const [balance, setBalance] = useState("000.000");
   const [pets, action] = useReducer(
     (pets, { type, value }) => {
@@ -94,13 +99,19 @@ const Minter = () => {
     })
   );
   const mint = () => {
+    setLoading(true);
     const metaplex = Metaplex.make(connection.connection).use(
       walletAdapterIdentity(wallet)
     );
     Mint(
       metaplex,
       pets.find((item) => item.active)
-    );
+    ).then((res) => {
+      setLoading(false);
+      api.success({
+        message: `Mint SuccessFul`,
+      });
+    });
   };
   const init = async () => {
     // const umi = createUmi(connection.connection.rpcEndpoint);
@@ -227,9 +238,14 @@ const Minter = () => {
             style={{ left: "-10px" }}
           />
         </div>
-        <span style={{ marginLeft: "10px", fontWeight: "bold" }} onClick={mint}>
-          Mint
-        </span>
+        <Spin size="small" spinning={loading}>
+          <span
+            style={{ marginLeft: "10px", fontWeight: "bold" }}
+            onClick={mint}
+          >
+            Mint
+          </span>
+        </Spin>
       </div>
 
       <div className="absolute top-1/2 right-5 flex-col">
@@ -238,6 +254,7 @@ const Minter = () => {
       </div>
       {/* <div style={{ height: "100px", width: "100%", background: "#fff" }}></div> */}
       <ParallaxText baseVelocity={0} pets={pets} action={action}></ParallaxText>
+      {contextHolder}
     </div>
   );
 };

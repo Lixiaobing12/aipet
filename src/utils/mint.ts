@@ -18,7 +18,7 @@ export const getCandyMachine = async (
   };
 };
 
-export const Mint = async (metaplex: Metaplex, source:any) => {
+export const Mint = async (metaplex: Metaplex, source: any) => {
   try {
     const candyMachine = await metaplex.candyMachines().findByAddress({
       address: new PublicKey(source.candyMachinePublicKey),
@@ -26,6 +26,7 @@ export const Mint = async (metaplex: Metaplex, source:any) => {
     // candyMachine.
     const tx = await metaplex.candyMachines().mint({
       candyMachine,
+      mintAuthority: metaplex.identity(),
       collectionUpdateAuthority: new PublicKey(
         source.collectionUpdateAuthorityPublicKey
       ),

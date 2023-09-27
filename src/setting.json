@@ -1,27 +1,27 @@
 {
   "nfts": [
     {
-      "collectionMintPublicKey": "8vLA6HKn5fUzh4eDJwQkQJnv9PdfJdoMK6YxgFzNZB66",
-      "collectionUpdateAuthorityPublicKey": "GtU8qDX2SKHoja9UfrjqV9YTWt8oVFE3f7ujxturMKw",
-      "candyMachinePublicKey": "5LnsBTrFUyVZXuRawUDqXJqUnyfyHQRbwvsiVArw9V3t",
+      "collectionMintPublicKey": "HNEDidmbSnV8W1KBzd8XdMjTTui7LW9jQ4DH778xSzTR",
+      "collectionUpdateAuthorityPublicKey": "8fdDUfytVqvPTyJ9hciFW8fs7cMqueD1CBpHmtnCFNKx",
+      "candyMachinePublicKey": "BpNVPPTPWGp8XtF3FXsr2WJLTYiJNN7h7hNwpcEwXANZ",
       "assets": "/img/bobo.png"
     },
     {
-      "collectionMintPublicKey": "AQNFpoPDPdAdAdkdQuYHxoYirJ9kpGdVwxMerfAuZLBg",
-      "collectionUpdateAuthorityPublicKey": "EEb9UCkR47RfWNJL8RJrEdHa9TMT74g5tYvm4augzQ4k",
-      "candyMachinePublicKey": "8oS6ef6EGyAeeoEWmHgQaWJBRH9ZihsJyEABWtWqLCeH",
+      "collectionMintPublicKey": "A11cYW1Umvsg69rw6iuBT6ErjRxjRC2TzsVinn1a8Pnk",
+      "collectionUpdateAuthorityPublicKey": "8fdDUfytVqvPTyJ9hciFW8fs7cMqueD1CBpHmtnCFNKx",
+      "candyMachinePublicKey": "EasgorCqPwxd2n58L7w13bV2cr6h8JShwukuU6B9czaj",
       "assets": "/img/gg.png"
     },
     {
-      "collectionMintPublicKey": "9i4HCdKuKZAMqNW3Bf6bik4deNobCkPJkUMMGy97Pv7k",
-      "collectionUpdateAuthorityPublicKey": "53m86tXXsvBwmETmRbzxate6Yyh9sRsCoVWWVZhvWaUN",
-      "candyMachinePublicKey": "2ZDdL6gMGq2fpMHzXdj9spQtZ92JSimWcbbEJJdRePuZ",
-      "assets": "/img/happy.png"
+      "collectionMintPublicKey": "J9qW9bNFJhAqGgu38j1673k1CcCW4rmZJxEQ6JV6xHQb",
+      "collectionUpdateAuthorityPublicKey": "8fdDUfytVqvPTyJ9hciFW8fs7cMqueD1CBpHmtnCFNKx",
+      "candyMachinePublicKey": "4phZ7Kg8yH3pZ8HodCywWUjsxbL4QSYmBY87JFceKAsB",
+      "assets": "/img/lala.png"
     },
     {
-      "collectionMintPublicKey": "57zMW1pcrgYzz1QKfPfWZ9isAW21Hf578na5Xobdaen7",
-      "collectionUpdateAuthorityPublicKey": "7d149xJEFGcYnz5DwSJ8uSHuD6nZbMiQ2rHyQKBPf3jJ",
-      "candyMachinePublicKey": "52WsHLJ29s43nubHSQi52jDFwipE48qaVnsATUrfYLYy",
+      "collectionMintPublicKey": "CTZW8BLNYFFT72EXiF1GMbmZaYfSawgg4wSMfcfPgEYM",
+      "collectionUpdateAuthorityPublicKey": "8fdDUfytVqvPTyJ9hciFW8fs7cMqueD1CBpHmtnCFNKx",
+      "candyMachinePublicKey": "B3mnWNQT8CowmV24QkNfxGrmSoT1svJuuHXVgd4KRW4R",
       "assets": "/img/huahua.png"
     }
   ]

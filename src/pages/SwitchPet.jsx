@@ -2,15 +2,20 @@ import {
   Metaplex,
   walletAdapterIdentity,
   PublicKey,
+  sol,
 } from "@metaplex-foundation/js";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { useEffect, useState } from "react";
 import setting from "../setting.json";
 import axios from "axios";
-import { Spin } from "antd";
+import { Spin, Modal, Input } from "antd";
+import * as web3 from "@solana/web3.js";
 
 const SwitchPet = () => {
   let times = 0;
+  const { confirm } = Modal;
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const { connection } = useConnection();
   const wallet = useWallet();
@@ -52,13 +57,85 @@ const SwitchPet = () => {
             })
           );
         });
-      console.log(promiseall);
       await Promise.all(promiseall).then((lists) => {
-        console.log(lists);
         setList((state) => [...lists]);
         setLoading(false);
       });
     }
+  };
+  const [price, setPrice] = useState();
+  // 卖
+  const tosell = (item) => {
+    confirm({
+      centered: true,
+      width: 300,
+      bodyStyle: {},
+      okButtonProps: { loading: confirmLoading },
+      content: (
+        <div className="flex-col items-left">
+          <div>Sell Price(sol):</div>
+          <Input
+            placeholder="input"
+            className="my-2"
+            onChange={(e) => {
+              setPrice(e.target.value);
+            }}
+          />
+        </div>
+      ),
+      onOk: () => {
+        return new Promise(async (resolve, reject) => {
+          setConfirmLoading(true);
+          const metaplex = Metaplex.make(connection).use(
+            walletAdapterIdentity(wallet)
+          );
+          try {
+            // 获取拍卖行信息
+            let res = await metaplex.auctionHouse().findByCreatorAndMint({
+              creator: metaplex.identity().publicKey,
+              treasuryMint: new web3.PublicKey(
+                "So11111111111111111111111111111111111111112"
+              ),
+            });
+            console.log("拍卖行：", res);
+          } catch (err) {
+            console.log("获取拍卖失败，正在新建", err);
+            try {
+              await metaplex.auctionHouse().create({
+                sellerFeeBasisPoints: 500, //手续费
+                authority: metaplex.identity(),
+                requiresSignOff: true,
+                canChangeSalePrice: true,
+              });
+              console.log("创建成功");
+            } catch (error) {
+              console.log("err: ", error);
+              reject(error);
+            }
+          }
+          const res = await metaplex.auctionHouse().findByCreatorAndMint({
+            creator: metaplex.identity().publicKey,
+            treasuryMint: new web3.PublicKey(
+              "So11111111111111111111111111111111111111112"
+            ),
+          });
+          console.log("获取拍卖信息成功：", res);
+          try {
+            const { listing, sellerTradeState } = await metaplex
+              .auctionHouse()
+              .list({
+                auctionHouse: res,
+                mintAccount: item.aid,
+                price: sol(price),
+              });
+            console.log("listing: ", listing);
+            console.log("sellerTradeState: ", sellerTradeState);
+          } catch (err) {
+            
+          }
+        });
+      },
+    });
   };
   useEffect(() => {
     connection && wallet.connected && init();
@@ -68,9 +145,21 @@ const SwitchPet = () => {
       {loading ? (
         <Spin size="large"></Spin>
       ) : (
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 relative">
           {lists.map((item, index) => (
-            <div className="flex-col h-150" key={index}>
+            <div className="flex-col h-150 relative" key={index}>
+              <div
+                className="absolute top-1 right-1"
+                style={{
+                  background:
+                    "linear-gradient(112.21deg, #67DEFF 1.98%, #EE66F9 98.02%)",
+                  padding: "3px 10px",
+                  borderRadius: "8px",
+                }}
+                onClick={() => tosell(item)}
+              >
+                Sell
+              </div>
               <div className="grow-2">
                 <img src={item.img} style={{ objectFit: "cover" }} />
               </div>
@@ -79,9 +168,9 @@ const SwitchPet = () => {
                 <div className="flex items-start my-2">
                   {item.attr
                     .filter((v) => v.value)
-                    .map((v) => (
+                    .map((v, i) => (
                       <span
-                        key={v.trait_type}
+                        key={`${v.trait_type}-${i}`}
                         className="bg-[#fff]"
                         style={{
                           color: "#000",
