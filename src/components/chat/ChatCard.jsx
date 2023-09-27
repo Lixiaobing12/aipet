@@ -34,38 +34,33 @@ export default function ChatCard() {
   } = useChatHook(initialToken, initialThemes);
 
   return (
-    <div className="mr-4 bg-[#FFFFFF29] rounded-2xl">
-      <div className=" flex-1 overflow-y-scroll max-h-[300px] ">
+    <div
+      className=" bg-white bg-opacity-10 backdrop-blur rounded-2xl"
+      style={
+        {
+          // backgroundImage: `url(/img/home_right.png)`,
+        }
+      }
+    >
+      <div className=" flex-1 overflow-y-scroll h-[150px] max-h-[300px] ">
         <div
-          className="max-w-2xl mx-auto space-y-12 grid grid-cols-1 overflow-y-auto scroll-smooth scrollbar-hide overflow-x-hidden"
+          className="max-w-2xl mx-auto space-y-6 grid grid-cols-1 overflow-y-auto scroll-smooth scrollbar-hide overflow-x-hidden"
           style={{ maxHeight: "30rem" }}
         >
-          {loading && (
-            <div className="flex justify-center items-center">
-              {/* <Dna
-                visible={true}
-                height="100"
-                width="100"
-                ariaLabel="dna-loading"
-                wrapperStyle={{}}
-                wrapperClass="dna-wrapper"
-              /> */}
-            </div>
-          )}
           <ul>
             {messages &&
               messages.map((message, idx) => {
                 return (
                   <div
                     key={idx}
-                    className={`mt-3 ${
+                    className={`mt-1 ${
                       message.fromUser
                         ? "place-self-end text-right"
                         : "place-self-start text-left"
                     }`}
                   >
                     <div
-                      className="mt-3  p-3 rounded-2xl"
+                      className="mt-1  px-3 rounded-2xl"
                       style={{
                         // backgroundColor: message.fromUser
                         //   ? themes.primaryColor
@@ -102,8 +97,8 @@ export default function ChatCard() {
       <div className={`w-full`}>
         <div className="justify-end items-center rounded-xl flex 2xl:mx-96 my-0">
           <input
-            className="p-1 bg-white bg-opacity-0 w-full rounded-l-md border-0 outline-none text-white placeholder-white"
-            placeholder="请输入您的问题..."
+            className="py-1 pl-3 bg-white bg-opacity-0 w-full rounded-l-md border-0 outline-none text-white placeholder-white"
+            placeholder="input message..."
             type="text"
             id="message"
             name="message"
@@ -120,14 +115,14 @@ export default function ChatCard() {
             ) : (
               <img className="w-10" src={mic} alt="mic"></img>
             )} */}
-            {recording ? <p>录音中</p> : <p>录音</p>}
+            {recording ? <p>~~~~</p> : <p>voice</p>}
           </button>
           <button
             // style={{ backgroundColor: themes.secondryColor }}
             className={`px-4 rounded-r-xl`}
             onClick={sendMessage}
           >
-            {/* <img className="w-8" src={arrow} alt="arrow" /> */}发送
+            {/* <img className="w-8" src={arrow} alt="arrow" /> */}send
           </button>
         </div>
       </div>

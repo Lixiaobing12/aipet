@@ -5,9 +5,10 @@ import Minter from "../pages/Minter";
 import Minters from "../pages/Minters";
 import PetArchives from "../pages/PetArchives";
 import Martin from "../pages/Martin/MartinPet";
-import MartinSkin from '../pages/Martin/MartinSkin';
-import MartinHouse from '../pages/Martin/MartinHouse';
+import MartinSkin from "../pages/Martin/MartinSkin";
+import MartinHouse from "../pages/Martin/MartinHouse";
 import TitleSlot from "../components/martin/TitleSlot";
+import Feed from "../pages/Feed";
 
 export const myRoute = [
   {
@@ -70,6 +71,16 @@ export const myRoute = [
       type: 4,
       title: "",
       slot: <TitleSlot />,
+      backurl: "/",
+    },
+  },
+  {
+    path: "/Feed",
+    element: <Feed />,
+    meta: {
+      // type:1 首页 2有title、返回路径 3 只有返回路径
+      type: 3,
+      title: "Feed Pet",
       backurl: "/",
     },
   },

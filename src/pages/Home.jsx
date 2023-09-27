@@ -1,5 +1,6 @@
 import { useMemo, useState, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
+import ChatCard from "../components/chat/ChatCard";
 
 const Items = () => {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ const Items = () => {
 };
 const Home = () => {
   const navigate = useNavigate();
+  const [openChat, setOpenChat] = useState(false);
   const [layouts, action] = useReducer(
     (layout, values) => {
       return { ...layout, ...values };
@@ -140,18 +142,36 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {/* ChatCard */}
+      <div
+        className={`absolute top-60 right-5 w-2/3 ${openChat ? " " : "hidden"}`}
+      >
+        <ChatCard />
+      </div>
+
       <img
         src="/img/pet.png"
         width={180}
         alt=""
         style={{ margin: "26vh auto 0" }}
+        onClick={() => {
+          setOpenChat(!openChat);
+        }}
       />
+
       <div className="flex justify-around">
         <div className="relative flex justify-center">
           <div className="absolute" style={{ width: "170px", top: "-60px" }}>
             <img src="/img/home_tip.png" alt="" />
           </div>
-          <img src="/img/home_mint.png" width={90} alt="" onClick={()=>{navigate('/Mint')}}/>
+          <img
+            src="/img/home_mint.png"
+            width={90}
+            alt=""
+            onClick={() => {
+              navigate("/Mint");
+            }}
+          />
         </div>
         <img src="/img/home_martin.png" width={90} alt="" onClick={()=>navigate('/Martin-Pet')}/>
       </div>

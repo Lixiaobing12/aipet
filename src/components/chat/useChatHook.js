@@ -12,7 +12,7 @@ const useChatHook = (initialToken, initialThemes) => {
   const bottomRef = useRef(null);
   const [messages, setMessages] = useState([
     {
-      msg: "您好，请问有什么可以帮到你吗 ?",
+      msg: "Hello, I am your pet.",
       fromUser: false,
       audioFile: "index",
     },
@@ -52,8 +52,9 @@ const useChatHook = (initialToken, initialThemes) => {
           console.log(response.data);
 
           let utterance = new SpeechSynthesisUtterance(response.data.data.msg);
-          speechSynthesis.speak(utterance);
-          // speechSynthesis.speak("喵喵喵");
+          console.log(utterance);
+          // speechSynthesis.speak(utterance);
+          speechSynthesis.speak(new SpeechSynthesisUtterance("喵喵喵"));
 
           let resp = response.data;
           let msg = "";

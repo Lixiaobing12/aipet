@@ -92,7 +92,6 @@ export default function Panel() {
               <img className="-mr-4" src={SVG_money} alt="money" />
               <img className="-mr-2" src={SVG_rugby} alt="rugby" />
             </div>
-            <ChatCard />
           </div>
         </div>
       </div>
