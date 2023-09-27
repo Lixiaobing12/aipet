@@ -120,7 +120,6 @@ export default function Panel() {
               />
               <img className="-mr-2" src={SVG_rugby} alt="rugby" />
             </div>
-            <ChatCard />
           </div>
         </div>
       </div>

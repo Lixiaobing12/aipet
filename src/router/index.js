@@ -9,6 +9,7 @@ import MartinSkin from "../pages/Martin/MartinSkin";
 import MartinHouse from "../pages/Martin/MartinHouse";
 import TitleSlot from "../components/martin/TitleSlot";
 import SwitchPet from "../pages/SwitchPet";
+import Feed from "../pages/Feed";
 
 export const myRoute = [
   {
@@ -80,6 +81,15 @@ export const myRoute = [
     meta: {
       type: 2,
       title: "Switch Pet",
+    },
+  },
+  {
+    path: "/Feed",
+    element: <Feed />,
+    meta: {
+      // type:1 首页 2有title、返回路径 3 只有返回路径
+      type: 3,
+      title: "Feed Pet",
       backurl: "/",
     },
   },
