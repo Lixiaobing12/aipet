@@ -9,16 +9,16 @@ import { SystemProgram } from "@solana/web3.js";
 import BigNumber from "bignumber.js";
 
 const ConnectWrapper = () => {
-  const connection = useConnection();
-  const { publicKey } = useWallet();
+  const { connection } = useConnection();
+  const { publicKey, connected } = useWallet();
   const [balance, setBalance] = useState("000.000");
   const init = async () => {
-    const balance = await connection.connection.getBalance(publicKey);
+    const balance = await connection.getBalance(publicKey);
     setBalance(BigNumber(balance).div(1e9).toFixed(3));
   };
   useEffect(() => {
-    init();
-  }, []);
+    connection && connected && init();
+  }, [connection, connected]);
 
   return (
     <div className="flex justify-between">
@@ -34,15 +34,15 @@ const ConnectWrapper = () => {
 };
 const DisConnectWrapper = () => {
   const connection = useConnection();
-  const { publicKey } = useWallet();
+  const { publicKey, connected } = useWallet();
   const [balance, setBalance] = useState("000.000");
   const init = async () => {
-    const balance = await connection.connection.getBalance(publicKey);
+    const balance = await connection.getBalance(publicKey);
     setBalance(BigNumber(balance).div(1e9).toFixed(3));
   };
   useEffect(() => {
-    init();
-  }, []);
+    connection && connected && init();
+  }, [connection, connected]);
   return (
     <div className="flex justify-between">
       <div className="wallet-button">

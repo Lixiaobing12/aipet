@@ -2,6 +2,15 @@ import { useEffect, useMemo, useReducer, useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import BigNumber from "bignumber.js";
 import { useRef } from "react";
+import {
+  Metaplex,
+  walletAdapterIdentity,
+  PublicKey,
+} from "@metaplex-foundation/js";
+import setting from "../setting.json";
+import { Mint, getCandyMachine } from "../utils/mint";
+import React from "react";
+
 function ParallaxText({ pets, baseVelocity = 100, action }) {
   /**
    * The number of times to repeat the child text should be dynamically calculated
@@ -28,7 +37,10 @@ function ParallaxText({ pets, baseVelocity = 100, action }) {
               transform: "scale(1.2)",
             }}
             onClick={() => {
-              action(index);
+              action({
+                type: "click",
+                value: index,
+              });
             }}
           ></img>
         ))}
@@ -39,35 +51,101 @@ function ParallaxText({ pets, baseVelocity = 100, action }) {
 }
 const Minter = () => {
   const connection = useConnection();
-  const { publicKey } = useWallet();
+  const wallet = useWallet();
   const [balance, setBalance] = useState("000.000");
+  const [pets, action] = useReducer(
+    (pets, { type, value }) => {
+      if (type == "update") {
+        let newPets = [];
+        pets.forEach((item) => {
+          value.forEach((v) => {
+            if (v.collectionMintAddress === item.collectionMintPublicKey) {
+              item = {
+                ...item,
+                ...v,
+              };
+              newPets.push(item);
+            }
+          });
+        });
+        return [...newPets];
+      } else {
+        pets.forEach((item, index) => {
+          if (index === value) {
+            item.active = true;
+          } else {
+            item.active = false;
+          }
+        });
+        return [...pets];
+      }
+    },
+    setting.nfts.map((item, index) => {
+      let active = index < 1;
+      return {
+        active,
+        url: item.assets,
+        ...item,
+        price: "0.000",
+        miner: "",
+        itemsRedeemed: "",
+        itemsAvailable: "",
+      };
+    })
+  );
+  const mint = () => {
+    const metaplex = Metaplex.make(connection.connection).use(
+      walletAdapterIdentity(wallet)
+    );
+    Mint(
+      metaplex,
+      pets.find((item) => item.active)
+    );
+  };
   const init = async () => {
-    const balance = await connection.connection.getBalance(publicKey);
+    // const umi = createUmi(connection.connection.rpcEndpoint);
+    const metaplex = Metaplex.make(connection.connection).use(
+      walletAdapterIdentity(wallet)
+    );
+    let promiseall = [];
+    setting.nfts.forEach((item) => {
+      promiseall.push(
+        getCandyMachine(metaplex, item.candyMachinePublicKey).then(
+          (res_candy) => {
+            return {
+              collectionMintAddress:
+                res_candy.candyMachine.collectionMintAddress.toBase58(),
+              price: (
+                res_candy.candyGuard.guards.solPayment.lamports.toString() / 1e9
+              ).toFixed(3),
+              miner:
+                res_candy.candyGuard.guards.solPayment.destination.toBase58(),
+              // 剩余数量
+              itemsRedeemed: res_candy.candyMachine.itemsRemaining.toString(),
+              // 总量
+              itemsAvailable: res_candy.candyMachine.itemsAvailable.toString(),
+            };
+          }
+        )
+      );
+    });
+    Promise.all(promiseall)
+      .then((res) => {
+        action({
+          type: "update",
+          value: res,
+        });
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
+    const balance = await connection.connection.getBalance(wallet.publicKey);
     setBalance(BigNumber(balance).div(1e9).toFixed(3));
   };
   useEffect(() => {
-    init();
-  }, []);
-  const [pets, action] = useReducer(
-    (pets, petIndex) => {
-      pets.forEach((item, index) => {
-        if (index === petIndex) {
-          item.active = true;
-        } else {
-          item.active = false;
-        }
-      });
-      return [...pets];
-    },
-    [
-      { url: "/img/boom.png", active: false, isMint: false },
-      { url: "/img/bobo.png", active: false, isMint: false },
-      { url: "/img/gg.png", active: true, isMint: true },
-      { url: "/img/happy.png", active: false, isMint: false },
-      { url: "/img/huahua.png", active: false, isMint: false },
-      { url: "/img/lala.png", active: false, isMint: false },
-    ]
-  );
+    connection && wallet.connected && init();
+  }, [connection, wallet.connected]);
+
   return (
     <div style={{ marginTop: "10px", overflow: "hidden" }}>
       <div className="flex justify-between items-start">
@@ -139,7 +217,7 @@ const Minter = () => {
               minWidth: "80px",
             }}
           >
-            1
+            {pets.filter((i) => i.active)?.[0].price ?? "0.000"}
           </div>
           <img
             src="/img/sol.png"
@@ -149,7 +227,9 @@ const Minter = () => {
             style={{ left: "-10px" }}
           />
         </div>
-        <span style={{ marginLeft: "10px", fontWeight: "bold" }}>Mint</span>
+        <span style={{ marginLeft: "10px", fontWeight: "bold" }} onClick={mint}>
+          Mint
+        </span>
       </div>
 
       <div className="absolute top-1/2 right-5 flex-col">

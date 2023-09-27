@@ -40,8 +40,8 @@ const GridList = () => {
 
   return (
     <div className="grid grid-cols-2 gap-4">
-      {lists.map((item) => (
-        <div className="flex-col h-150">
+      {lists.map((item, index) => (
+        <div className="flex-col h-150" key={index}>
           <div className="grow-2">
             <img src={item.img} style={{ "object-fit": "cover" }} />
           </div>
@@ -50,6 +50,7 @@ const GridList = () => {
             <div className="flex items-start my-2">
               {item.skill.map((v) => (
                 <span
+                  key={v}
                   className="bg-[#fff]"
                   style={{ color: "#000", marginLeft: "6px", padding: "0 5px" }}
                 >

@@ -15,8 +15,8 @@ const Items = () => {
     { url: "/img/feed.svg", to: "/feed" },
     { url: "/img/sell.svg", to: "/feed" },
     { url: "/img/breed.svg", to: "/feed" },
-    { url: "/img/detail.svg", to: "/feed" },
-    { url: "/img/switch.svg", to: "/feed" },
+    { url: "/img/detail.svg", to: "/petArchives", width: 42 },
+    { url: "/img/switch.svg", to: "/SwitchPet", width: 42 },
   ];
 
   return useMemo(() => {
@@ -33,7 +33,7 @@ const Items = () => {
             <img
               src={item.url}
               key={item.url}
-              width={50}
+              width={item.width ?? 50}
               onClick={() => {
                 navigate(item.to);
               }}
@@ -151,9 +151,21 @@ const Home = () => {
           <div className="absolute" style={{ width: "170px", top: "-60px" }}>
             <img src="/img/home_tip.png" alt="" />
           </div>
-          <img src="/img/home_mint.png" width={90} alt="" onClick={()=>{navigate('/Mint')}}/>
+          <img
+            src="/img/home_mint.png"
+            width={90}
+            alt=""
+            onClick={() => {
+              navigate("/Mint");
+            }}
+          />
         </div>
-        <img src="/img/home_martin.png" width={90} alt="" onClick={()=>navigate('/Martin-Pet')}/>
+        <img
+          src="/img/home_martin.png"
+          width={90}
+          alt=""
+          onClick={() => navigate("/Martin-Pet")}
+        />
       </div>
     </div>
   );

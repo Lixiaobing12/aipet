@@ -5,7 +5,7 @@ import Panel from "../components/petArchives/Panel";
 export default function PetArchives() {
   return (
     <div className="  bg-black">
-      <HeaderBack />
+      {/* <HeaderBack /> */}
       <Panel />
     </div>
   );

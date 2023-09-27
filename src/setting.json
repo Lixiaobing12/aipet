@@ -1,0 +1,28 @@
+{
+  "nfts": [
+    {
+      "collectionMintPublicKey": "8vLA6HKn5fUzh4eDJwQkQJnv9PdfJdoMK6YxgFzNZB66",
+      "collectionUpdateAuthorityPublicKey": "GtU8qDX2SKHoja9UfrjqV9YTWt8oVFE3f7ujxturMKw",
+      "candyMachinePublicKey": "5LnsBTrFUyVZXuRawUDqXJqUnyfyHQRbwvsiVArw9V3t",
+      "assets": "/img/bobo.png"
+    },
+    {
+      "collectionMintPublicKey": "AQNFpoPDPdAdAdkdQuYHxoYirJ9kpGdVwxMerfAuZLBg",
+      "collectionUpdateAuthorityPublicKey": "EEb9UCkR47RfWNJL8RJrEdHa9TMT74g5tYvm4augzQ4k",
+      "candyMachinePublicKey": "8oS6ef6EGyAeeoEWmHgQaWJBRH9ZihsJyEABWtWqLCeH",
+      "assets": "/img/gg.png"
+    },
+    {
+      "collectionMintPublicKey": "9i4HCdKuKZAMqNW3Bf6bik4deNobCkPJkUMMGy97Pv7k",
+      "collectionUpdateAuthorityPublicKey": "53m86tXXsvBwmETmRbzxate6Yyh9sRsCoVWWVZhvWaUN",
+      "candyMachinePublicKey": "2ZDdL6gMGq2fpMHzXdj9spQtZ92JSimWcbbEJJdRePuZ",
+      "assets": "/img/happy.png"
+    },
+    {
+      "collectionMintPublicKey": "57zMW1pcrgYzz1QKfPfWZ9isAW21Hf578na5Xobdaen7",
+      "collectionUpdateAuthorityPublicKey": "7d149xJEFGcYnz5DwSJ8uSHuD6nZbMiQ2rHyQKBPf3jJ",
+      "candyMachinePublicKey": "52WsHLJ29s43nubHSQi52jDFwipE48qaVnsATUrfYLYy",
+      "assets": "/img/huahua.png"
+    }
+  ]
+}

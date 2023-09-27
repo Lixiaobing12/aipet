@@ -12,8 +12,31 @@ import PNG_petFile_Lennie from "../../images/png/petFile_Lennie.png";
 
 import "./Panel.css";
 import ChatCard from "../chat/ChatCard";
+import { Modal } from "antd";
 
 export default function Panel() {
+  const { confirm } = Modal;
+  const openDialog = () => {
+    confirm({
+      width:300,
+      centered:true,
+      icon:false,
+      bodyStyle:{
+        borderRadius:"15px"
+      },
+      style:{
+        borderRadius:"15px"
+      },
+      content: "Some descriptions",
+      onOk() {
+        console.log("OK");
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+
   return (
     <div
       className=" w-screen h-screen overflow-hidden"
@@ -89,7 +112,12 @@ export default function Panel() {
           </div>
           <div>
             <div className=" flex justify-end pr-4">
-              <img className="-mr-4" src={SVG_money} alt="money" />
+              <img
+                className="-mr-4"
+                src={SVG_money}
+                alt="money"
+                onClick={openDialog}
+              />
               <img className="-mr-2" src={SVG_rugby} alt="rugby" />
             </div>
             <ChatCard />
