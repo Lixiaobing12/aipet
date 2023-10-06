@@ -14,6 +14,7 @@ import {
 import { clusterApiUrl } from "@solana/web3.js";
 import { notification } from "antd";
 import { useCallback, useMemo } from "react";
+import ProxyWalletContext from "./ProxyWalletContextProvider";
 
 const WalletContextProvider = (props) => {
   const network = WalletAdapterNetwork.Devnet;
@@ -45,7 +46,7 @@ const WalletContextProvider = (props) => {
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} onError={onError} autoConnect={true}>
         <ReactUIWalletModalProvider>
-          {props.children}
+          <ProxyWalletContext>{props.children}</ProxyWalletContext>
         </ReactUIWalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>

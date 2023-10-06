@@ -156,7 +156,6 @@ const Minter = () => {
   useEffect(() => {
     connection && wallet.connected && init();
   }, [connection, wallet.connected]);
-
   return (
     <div style={{ marginTop: "10px", overflow: "hidden" }}>
       <div className="flex justify-between items-start">

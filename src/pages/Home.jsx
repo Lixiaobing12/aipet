@@ -1,6 +1,15 @@
-import { useMemo, useState, useReducer } from "react";
+import { useMemo, useState, useReducer, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ChatCard from "../components/chat/ChatCard";
+import {
+  Metaplex,
+  walletAdapterIdentity,
+  PublicKey,
+  sol,
+} from "@metaplex-foundation/js";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import setting from "../setting.json";
+import axios from "axios";
 
 const Items = () => {
   const navigate = useNavigate();
@@ -13,9 +22,9 @@ const Items = () => {
     }
   };
   const ls = [
-    { url: "/img/feed.svg", to: "/feed" },
-    { url: "/img/sell.svg", to: "/feed" },
-    { url: "/img/breed.svg", to: "/feed" },
+    { url: "/img/feed.svg", to: "/Feed" },
+    { url: "/img/sell.svg", to: "/Feed" },
+    { url: "/img/breed.svg", to: "/Feed" },
     { url: "/img/detail.svg", to: "/petArchives", width: 42 },
     { url: "/img/switch.svg", to: "/SwitchPet", width: 42 },
   ];
@@ -58,6 +67,11 @@ const Items = () => {
   }, [height]);
 };
 const Home = () => {
+  let times = 0;
+  const [lists, setList] = useState([]);
+  const { connection } = useConnection();
+  const [loading, setLoading] = useState(false);
+  const wallet = useWallet();
   const navigate = useNavigate();
   const [openChat, setOpenChat] = useState(false);
   const [layouts, action] = useReducer(
@@ -71,6 +85,53 @@ const Home = () => {
       birthday: "****",
     }
   );
+
+  const init = async () => {
+    if (wallet.connected && wallet.publicKey) {
+      if (times === 1) return;
+      times++;
+      setLoading(true);
+      const metaplex = Metaplex.make(connection).use(
+        walletAdapterIdentity(wallet)
+      );
+      const ownedNfts =
+        (await metaplex.nfts().findAllByOwner({
+          owner: metaplex.identity().publicKey,
+        })) || [];
+
+      let promiseall = [];
+      let collectionMintPublicKeys = setting.nfts.map(
+        (item) => item.collectionMintPublicKey
+      );
+      ownedNfts
+        .filter((item) => {
+          return collectionMintPublicKeys.includes(
+            item.collection?.address.toBase58()
+          );
+        })
+        .forEach((item) => {
+          promiseall.push(
+            new Promise(async (resolve, reject) => {
+              const { data } = await axios.get(item.uri);
+              resolve({
+                aid: item.address.toBase58(),
+                nickname: data.name,
+                skill: [],
+                attr: data.attributes,
+                img: data.image,
+              });
+            })
+          );
+        });
+      await Promise.all(promiseall).then((lists) => {
+        setList((state) => [...lists]);
+        setLoading(false);
+      });
+    }
+  };
+  useEffect(() => {
+    connection && wallet.connected && init();
+  }, [connection, wallet.connected]);
   return (
     <div
       style={{
@@ -148,14 +209,13 @@ const Home = () => {
       >
         <ChatCard />
       </div>
-
       <img
         src="/img/pet.png"
         width={180}
         alt=""
         style={{ margin: "26vh auto 0" }}
         onClick={() => {
-          setOpenChat(!openChat);
+          lists.length && setOpenChat(!openChat);
         }}
       />
 

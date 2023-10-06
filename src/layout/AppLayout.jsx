@@ -39,6 +39,7 @@ const AppLayout = () => {
           left: "16px",
           right: "16px",
           top: "12px",
+          zIndex:99
         }}
       >
         {!!layouts.type && start && <LayoutHeader {...layouts} />}
