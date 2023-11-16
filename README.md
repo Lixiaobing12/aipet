@@ -1,3 +1,7 @@
+#Hey, founders, alex from delphi digital here. this is interesting. I'd like to learn more. Could you please message me on twitter @helpedhope and send me your deck? the one you submitted to hyperdrive is not readable. Thanks
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
